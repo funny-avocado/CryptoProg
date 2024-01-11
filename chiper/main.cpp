@@ -28,7 +28,7 @@ void ProcessFile(const std::string& inputFile, const std::string& outputFile, co
         std::ifstream in(inputFile, std::ios::binary);
         std::ofstream out(outputFile, std::ios::binary);
         if (!in.is_open() || !out.is_open()) {
-            std::cout << "Îøèáêà îòêðûòèÿ ôàéëîâ!" << std::endl;
+            std::cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð¾Ð²!" << std::endl;
             return;
         }
         SecByteBlock key = DeriveKey(password);
@@ -40,7 +40,7 @@ void ProcessFile(const std::string& inputFile, const std::string& outputFile, co
             FileSource fileSrc(in, true, new StreamTransformationFilter(enc, new FileSink(out)));
             fileSrc.PumpAll();
             fileSrc.Flush(true);
-            std::cout << "Ôàéë çàøèôðîâàí!" << std::endl;
+            std::cout << "Ð¤Ð°Ð¹Ð» Ð·Ð°ÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ð½!" << std::endl;
         }
         else {
             CBC_Mode<AES>::Decryption dec;
@@ -48,11 +48,11 @@ void ProcessFile(const std::string& inputFile, const std::string& outputFile, co
             FileSource fileSrc(in, true, new StreamTransformationFilter(dec, new FileSink(out)));
             fileSrc.PumpAll();
             fileSrc.Flush(true);
-            std::cout << "Ôàéë ðàñøèôðîâàí!" << std::endl;
+            std::cout << "Ð¤Ð°Ð¹Ð» Ñ€Ð°ÑÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ð½!" << std::endl;
         }
     }
     catch (const Exception& ex) {
-        std::cerr << "Crypto++ èñêëþ÷åíèå: " << ex.what() <<
+        std::cerr << "Crypto++ Ð¸ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ: " << ex.what() <<
             std::endl;
     }
 }
@@ -60,13 +60,13 @@ int main()
 {
     std::string inputFile, outputFile, password;
     int choice;
-    std::cout << "Âûáåðèòå ðåæèì ðàáîòû:\n1. Çàøèôðîâàòü ôàéë\n2.Ðàñøèôðîâàòü ôàéë\n";
+    std::cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ€ÐµÐ¶Ð¸Ð¼ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹:\n1.Ð—Ð°ÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»\n2.Ð Ð°ÑÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»\n";
     std::cin >> choice;
-    std::cout << "Ââåäèòå èìÿ âõîäíîãî ôàéëà: ";
+    std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð²Ñ…Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°: ";
     std::cin >> inputFile;
-    std::cout << "Ââåäèòå èìÿ âûõîäíîãî ôàéëà: ";
+    std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð²Ñ‹Ñ…Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°: ";
     std::cin >> outputFile;
-    std::cout << "Ââåäèòå ïàðîëü: ";
+    std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ: ";
     std::cin >> password;
     bool encrypt = (choice == 1);
     ProcessFile(inputFile, outputFile, password, encrypt);
